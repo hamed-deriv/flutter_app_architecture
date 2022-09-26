@@ -2,10 +2,7 @@
 set namespaceSeparator ::
 
 abstract class "flutter_app_architecture::structure::data::base_repository.dart::BaseRepository" {
-  +BaseAPI? api
 }
-
-"flutter_app_architecture::structure::data::base_repository.dart::BaseRepository" o-- "flutter_deriv_api::services::connection::api_manager::base_api.dart::BaseAPI"
 
 abstract class "flutter_app_architecture::structure::domain::base_service.dart::BaseService" {
   +BaseRepository repository
@@ -47,7 +44,7 @@ abstract class "flutter_app_architecture::structure::presentation::state_manager
 "bloc::src::bloc.dart::Cubit" <|-- "flutter_app_architecture::structure::presentation::state_manager::base_cubit.dart::BaseCubit"
 
 abstract class "flutter_app_architecture::structure::presentation::base_widget.dart::BaseWidget" {
-  +String? cubitKey
+  +String cubitKey
   +Widget Function<Entity extends BaseEntity>(BuildContext, BaseState<Entity>) loadingWidgetBuilder
   +Widget Function<Entity extends BaseEntity>(BuildContext, BaseState<Entity>) successWidgetBuilder
   +Widget Function<Entity extends BaseEntity>(BuildContext, BaseState<Entity>) errorWidgetBuilder
