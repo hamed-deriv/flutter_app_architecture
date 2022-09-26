@@ -19,11 +19,11 @@ abstract class BaseWidget<Entity extends BaseEntity,
     required this.loadingWidgetBuilder,
     required this.successWidgetBuilder,
     required this.errorWidgetBuilder,
-    this.cubitKey,
+    this.cubitKey = BaseBlocManager.defaultKey,
     Key? key,
   }) : super(key: key);
 
-  final String? cubitKey;
+  final String cubitKey;
 
   final GeneralWidgetBuilder loadingWidgetBuilder;
   final GeneralWidgetBuilder successWidgetBuilder;
@@ -31,8 +31,7 @@ abstract class BaseWidget<Entity extends BaseEntity,
 
   @override
   Widget build(BuildContext context) => BlocBuilder<Cubit, BaseState<Entity>>(
-        bloc: BlocManager.instance
-            .fetch<Cubit>(cubitKey ?? BaseBlocManager.defaultKey),
+        bloc: BlocManager.instance.fetch<Cubit>(cubitKey),
         builder: (BuildContext context, BaseState<Entity> state) {
           if (state.status == BaseStateStatus.initial ||
               state.status == BaseStateStatus.loading) {
