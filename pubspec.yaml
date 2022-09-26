@@ -12,6 +12,20 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_deriv_api:
+    git:
+      url: git@github.com:deriv-com/flutter-deriv-api.git
+      ref: dev
+
+  flutter_deriv_bloc_manager:
+    git:
+      url: git@github.com:regentmarkets/flutter-deriv-packages.git
+      path: packages/deriv_bloc_manager
+      ref: dev
+
+  equatable: ^2.0.5
+  flutter_bloc: ^7.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
