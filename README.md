@@ -1,6 +1,8 @@
-# flutter_app_architecture
+# flutter app architecture
 
-A new Flutter project.
+Flutter App Architecture
+
+![UML Diagram](/diagram.png)
 
 ## Getting Started
 

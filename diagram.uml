@@ -1,0 +1,60 @@
+@startuml
+set namespaceSeparator ::
+
+abstract class "flutter_app_architecture::structure::data::base_repository.dart::BaseRepository" {
+  +BaseAPI? api
+}
+
+"flutter_app_architecture::structure::data::base_repository.dart::BaseRepository" o-- "flutter_deriv_api::services::connection::api_manager::base_api.dart::BaseAPI"
+
+abstract class "flutter_app_architecture::structure::domain::base_service.dart::BaseService" {
+  +BaseRepository repository
+}
+
+"flutter_app_architecture::structure::domain::base_service.dart::BaseService" o-- "flutter_app_architecture::structure::data::base_repository.dart::BaseRepository"
+
+abstract class "flutter_app_architecture::structure::domain::base_entity.dart::BaseEntity" {
+}
+
+class "flutter_app_architecture::structure::presentation::state_manager::base_state_status.dart::BaseStateStatus" {
+  +int index
+  {static} +List<BaseStateStatus> values
+  {static} +BaseStateStatus initial
+  {static} +BaseStateStatus loading
+  {static} +BaseStateStatus success
+  {static} +BaseStateStatus failure
+}
+
+"flutter_app_architecture::structure::presentation::state_manager::base_state_status.dart::BaseStateStatus" o-- "flutter_app_architecture::structure::presentation::state_manager::base_state_status.dart::BaseStateStatus"
+"dart::core::Enum" <|-- "flutter_app_architecture::structure::presentation::state_manager::base_state_status.dart::BaseStateStatus"
+
+class "flutter_app_architecture::structure::presentation::state_manager::base_state.dart::BaseState" {
+  +BaseStateStatus status
+  +Entity? data
+  +String? error
+  +List<Object?> props
+  +String toString()
+}
+
+"flutter_app_architecture::structure::presentation::state_manager::base_state.dart::BaseState" o-- "flutter_app_architecture::structure::presentation::state_manager::base_state_status.dart::BaseStateStatus"
+"equatable::src::equatable_mixin.dart::EquatableMixin" <|-- "flutter_app_architecture::structure::presentation::state_manager::base_state.dart::BaseState"
+
+abstract class "flutter_app_architecture::structure::presentation::state_manager::base_cubit.dart::BaseCubit" {
+  +BaseService<Entity>? service
+}
+
+"flutter_app_architecture::structure::presentation::state_manager::base_cubit.dart::BaseCubit" o-- "flutter_app_architecture::structure::domain::base_service.dart::BaseService<Entity>"
+"bloc::src::bloc.dart::Cubit" <|-- "flutter_app_architecture::structure::presentation::state_manager::base_cubit.dart::BaseCubit"
+
+abstract class "flutter_app_architecture::structure::presentation::base_widget.dart::BaseWidget" {
+  +String? cubitKey
+  +Widget Function<Entity extends BaseEntity>(BuildContext, BaseState<Entity>) loadingWidgetBuilder
+  +Widget Function<Entity extends BaseEntity>(BuildContext, BaseState<Entity>) successWidgetBuilder
+  +Widget Function<Entity extends BaseEntity>(BuildContext, BaseState<Entity>) errorWidgetBuilder
+  +Widget build()
+}
+
+"flutter_app_architecture::structure::presentation::base_widget.dart::BaseWidget" o-- "flutter_app_architecture::structure::presentation::base_widget.dart::Widget Function<Entity extends BaseEntity>(BuildContext, BaseState<Entity>)"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "flutter_app_architecture::structure::presentation::base_widget.dart::BaseWidget"
+
+@enduml

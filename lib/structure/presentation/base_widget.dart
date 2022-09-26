@@ -8,8 +8,13 @@ import 'package:flutter_app_architecture/structure/presentation/state_manager/ba
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state.dart';
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state_status.dart';
 
-abstract class BaseWidget<E extends BaseEntity, B extends BaseCubit<E>>
-    extends StatelessWidget {
+typedef GeneralWidgetBuilder = Widget Function<Entity extends BaseEntity>(
+  BuildContext,
+  BaseState<Entity>,
+);
+
+abstract class BaseWidget<Entity extends BaseEntity,
+    Cubit extends BaseCubit<Entity>> extends StatelessWidget {
   const BaseWidget({
     required this.loadingWidgetBuilder,
     required this.successWidgetBuilder,
@@ -20,15 +25,15 @@ abstract class BaseWidget<E extends BaseEntity, B extends BaseCubit<E>>
 
   final String? cubitKey;
 
-  final Widget Function(BuildContext, BaseState<E>) loadingWidgetBuilder;
-  final Widget Function(BuildContext, BaseState<E>) successWidgetBuilder;
-  final Widget Function(BuildContext, BaseState<E>) errorWidgetBuilder;
+  final GeneralWidgetBuilder loadingWidgetBuilder;
+  final GeneralWidgetBuilder successWidgetBuilder;
+  final GeneralWidgetBuilder errorWidgetBuilder;
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<B, BaseState<E>>(
+  Widget build(BuildContext context) => BlocBuilder<Cubit, BaseState<Entity>>(
         bloc: BlocManager.instance
-            .fetch<B>(cubitKey ?? BaseBlocManager.defaultKey),
-        builder: (BuildContext context, BaseState<E> state) {
+            .fetch<Cubit>(cubitKey ?? BaseBlocManager.defaultKey),
+        builder: (BuildContext context, BaseState<Entity> state) {
           if (state.status == BaseStateStatus.initial ||
               state.status == BaseStateStatus.loading) {
             return loadingWidgetBuilder(context, state);
