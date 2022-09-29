@@ -15,6 +15,14 @@ dependencies:
   flutter_app_architecture:
     path: ../
 
+  flutter_deriv_bloc_manager:
+    git:
+      url: git@github.com:regentmarkets/flutter-deriv-packages.git
+      path: packages/deriv_bloc_manager
+      ref: dev
+
+  flutter_bloc: ^7.3.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
