@@ -8,13 +8,13 @@ import 'package:flutter_app_architecture/structure/presentation/state_manager/ba
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state.dart';
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state_status.dart';
 
-typedef GeneralWidgetBuilder = Widget Function<Entity extends BaseEntity>(
-  BuildContext,
-  BaseState<Entity>,
+typedef GeneralWidgetBuilder<Entity extends BaseEntity> = Widget Function(
+  BuildContext context,
+  BaseState<Entity> state,
 );
 
-abstract class BaseWidget<Entity extends BaseEntity,
-    Cubit extends BaseCubit<Entity>> extends StatelessWidget {
+class BaseWidget<Entity extends BaseEntity, Cubit extends BaseCubit<Entity>>
+    extends StatelessWidget {
   const BaseWidget({
     required this.loadingWidgetBuilder,
     required this.successWidgetBuilder,
