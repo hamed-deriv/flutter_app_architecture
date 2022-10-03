@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_app_architecture/structure/domain/base_entity.dart';
-import 'package:flutter_app_architecture/structure/presentation/base_widget.dart';
-import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state.dart';
-
 import 'package:flutter_deriv_bloc_manager/manager.dart';
 
 import 'package:example/sample_component/data/mock_user_repository.dart';
-import 'package:example/sample_component/domain/user_entity.dart';
 import 'package:example/sample_component/domain/user_service.dart';
 import 'package:example/sample_component/presentation/user_cubit.dart';
+import 'package:example/sample_component/presentation/user_widget.dart';
 
 void main() {
   BlocManager.instance.register(
@@ -31,21 +27,7 @@ class App extends StatelessWidget {
           body: Center(
             child: Column(
               children: <Widget>[
-                Expanded(
-                  child: Center(
-                    child: BaseWidget<UserEntity, UserCubit>(
-                      loadingWidgetBuilder:
-                          (BuildContext context, BaseState<BaseEntity> state) =>
-                              const CircularProgressIndicator(),
-                      successWidgetBuilder:
-                          (BuildContext context, BaseState<BaseEntity> state) =>
-                              Text('${state.data}'),
-                      errorWidgetBuilder:
-                          (BuildContext context, BaseState<BaseEntity> state) =>
-                              const Text('RANDOM ERROR!'),
-                    ),
-                  ),
-                ),
+                Expanded(child: Center(child: UserWidget())),
                 TextButton(
                   child: const Text('FETCH USER'),
                   onPressed: () =>

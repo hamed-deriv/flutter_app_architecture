@@ -1,6 +1,6 @@
 import 'package:flutter_app_architecture/structure/domain/base_entity.dart';
 
-import 'package:example/sample_component/data/models/user_model.dart';
+import 'package:example/sample_component/data/user_model.dart';
 
 class UserEntity extends BaseEntity {
   UserEntity(this.surname, this.lastName, this.birthDate);
