@@ -1,3 +1,5 @@
 abstract class BaseMapper<E, M> {
-  E getEntity(M model);
+  M fromEntity(E entity);
+
+  E toEntity(M model);
 }
