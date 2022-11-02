@@ -1,3 +1,5 @@
+export './structure/data/base_mapper.dart';
+export './structure/data/base_model.dart';
 export './structure/domain/base_entity.dart';
 export './structure/domain/base_repository.dart';
 export './structure/domain/base_service.dart';
