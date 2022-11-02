@@ -4,12 +4,14 @@ import 'package:flutter_app_architecture/structure/domain/base_entity.dart';
 import 'package:flutter_app_architecture/structure/presentation/base_widget.dart';
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state.dart';
 
+import 'package:example/sample_component/data/user_model.dart';
 import 'package:example/sample_component/domain/user_entity.dart';
 import 'package:example/sample_component/presentation/user_cubit.dart';
 
 class UserWidget extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => BaseWidget<UserEntity, UserCubit>(
+  Widget build(BuildContext context) =>
+      BaseWidget<UserEntity, UserModel, UserCubit>(
         loadingWidgetBuilder:
             (BuildContext context, BaseState<BaseEntity> state) =>
                 const CircularProgressIndicator(),

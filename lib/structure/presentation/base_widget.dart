@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_deriv_bloc_manager/manager.dart';
 
+import 'package:flutter_app_architecture/structure/data/base_model.dart';
 import 'package:flutter_app_architecture/structure/domain/base_entity.dart';
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_cubit.dart';
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state.dart';
@@ -13,8 +14,8 @@ typedef GeneralWidgetBuilder<Entity extends BaseEntity> = Widget Function(
   BaseState<Entity> state,
 );
 
-class BaseWidget<Entity extends BaseEntity, Cubit extends BaseCubit<Entity>>
-    extends StatelessWidget {
+class BaseWidget<Entity extends BaseEntity, Model extends BaseModel,
+    Cubit extends BaseCubit<Entity, Model>> extends StatelessWidget {
   const BaseWidget({
     required this.loadingWidgetBuilder,
     required this.successWidgetBuilder,

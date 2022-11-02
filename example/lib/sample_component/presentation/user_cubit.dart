@@ -4,10 +4,11 @@ import 'package:flutter_app_architecture/structure/presentation/state_manager/ba
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state.dart';
 import 'package:flutter_app_architecture/structure/presentation/state_manager/base_state_status.dart';
 
+import 'package:example/sample_component/data/user_model.dart';
 import 'package:example/sample_component/domain/user_entity.dart';
 import 'package:example/sample_component/domain/user_service.dart';
 
-class UserCubit extends BaseCubit<UserEntity> {
+class UserCubit extends BaseCubit<UserEntity, UserModel> {
   UserCubit({required UserService service})
       : super(
           service: service,
