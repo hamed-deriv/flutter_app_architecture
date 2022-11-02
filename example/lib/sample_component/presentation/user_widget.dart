@@ -12,6 +12,9 @@ class UserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BaseWidget<UserEntity, UserModel, UserCubit>(
+        initialWidgetBuilder:
+            (BuildContext context, BaseState<BaseEntity> state) =>
+                const SizedBox.shrink(),
         loadingWidgetBuilder:
             (BuildContext context, BaseState<BaseEntity> state) =>
                 const CircularProgressIndicator(),
