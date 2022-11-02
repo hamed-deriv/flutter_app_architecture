@@ -17,6 +17,7 @@ typedef GeneralWidgetBuilder<Entity extends BaseEntity> = Widget Function(
 class BaseWidget<Entity extends BaseEntity, Model extends BaseModel,
     Cubit extends BaseCubit<Entity, Model>> extends StatelessWidget {
   const BaseWidget({
+    required this.initialWidgetBuilder,
     required this.loadingWidgetBuilder,
     required this.successWidgetBuilder,
     required this.errorWidgetBuilder,
@@ -26,6 +27,7 @@ class BaseWidget<Entity extends BaseEntity, Model extends BaseModel,
 
   final String cubitKey;
 
+  final GeneralWidgetBuilder initialWidgetBuilder;
   final GeneralWidgetBuilder loadingWidgetBuilder;
   final GeneralWidgetBuilder successWidgetBuilder;
   final GeneralWidgetBuilder errorWidgetBuilder;
@@ -34,8 +36,11 @@ class BaseWidget<Entity extends BaseEntity, Model extends BaseModel,
   Widget build(BuildContext context) => BlocBuilder<Cubit, BaseState<Entity>>(
         bloc: BlocManager.instance.fetch<Cubit>(cubitKey),
         builder: (BuildContext context, BaseState<Entity> state) {
-          if (state.status == BaseStateStatus.initial ||
-              state.status == BaseStateStatus.loading) {
+          if (state.status == BaseStateStatus.initial) {
+            return initialWidgetBuilder(context, state);
+          }
+
+          if (state.status == BaseStateStatus.loading) {
             return loadingWidgetBuilder(context, state);
           }
 
